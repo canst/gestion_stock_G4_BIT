@@ -145,7 +145,7 @@ if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
                 
                 <input type="submit" id='submit' value='ENTRER' name="entrer">
                 
-                <strong><a href="register.php"><font color="#993333" size="+2" face="Bradley Hand ITC">S'inscrire</font></a></strong>
+              
                 <div align="center">
                     <a href="rest-pwd.php"><font size="+1" face="Bradley Hand ITC"><strong>Mots de pass oublie? </strong></font></a>
                 </div>

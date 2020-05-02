@@ -1,71 +1,4 @@
-﻿<?php
-
-if(isset($_SESSION['id'])){
-
-  header("Location: home.php");
-  exit();
-}
-
-
-
-
-if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
-            
-
-    require_once 'scriptsdb/config.php';
-             $username = htmlspecialchars($_POST['pseudo']);
-             $userpass = $_POST['pass'];
-            if(!empty($username) AND !empty($userpass)){
-             $requser = $bdd->prepare("SELECT * FROM register WHERE pseudo=? AND pass=?");
-           //$pwd = password_hash($_POST['pass'], PASSWORD_BCRYPT);
-             $requser->execute(array($username,$userpass));
-              $userexist = $requser->rowCount();
-
-            if($userexist ==1 ){
-
-             $userinfo= $requser->fetch();
-				
-            $_SESSION['id'] = $userinfo['id'];
-            $_SESSION['pseudo'] = $userinfo['pseudo'];
-            $_SESSION['mail'] = $userinfo['mail'];
-            $_SESSION['pass'] = $userinfo['pass'];
-				
-			  header("Location: home.php?id=".$_SESSION['id']);
-
-        }else{
-          $connecterreur = "Mot de passe et / ou nom d'utilisateur incorrect.";
-        }
-
-      }else{
-      $connecterreur= "Tous les champs doivent Ãªtre complÃ©tÃ©s";
-
-      }
-
-
-    }
-
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+﻿
 
 
 <!DOCTYPE html>
@@ -103,7 +36,7 @@ if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
         <ul class="navbar-nav text-uppercase ml-auto">
          
           <li class="nav-item">
-            <a class="nav-link js-scroll- btn btn-info" href="register.php">register</a>
+            <a class="nav-link js-scroll- btn btn-info" href="index.php">acceuil</a>
           </li>
         </ul>
     </div>

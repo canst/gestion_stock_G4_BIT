@@ -1,245 +1,178 @@
-<?php
-
-if(isset($_SESSION['id'])){
-
-  header("Location: home.php");
-  exit();
-}
-
-
-
-
-if(!empty($_POST['pseudo']) && !empty($_POST['pass'])){
-            
-
-    require_once 'scriptsdb/config.php';
-             $username = htmlspecialchars($_POST['pseudo']);
-             $userpass = $_POST['pass'];
-            if(!empty($username) AND !empty($userpass)){
-             $requser = $bdd->prepare("SELECT * FROM register WHERE pseudo=? AND pass=?");
-           //$pwd = password_hash($_POST['pass'], PASSWORD_BCRYPT);
-             $requser->execute(array($username,$userpass));
-              $userexist = $requser->rowCount();
-
-            if($userexist ==1 ){
-
-             $userinfo= $requser->fetch();
-				
-            $_SESSION['id'] = $userinfo['id'];
-            $_SESSION['pseudo'] = $userinfo['pseudo'];
-            $_SESSION['mail'] = $userinfo['mail'];
-            $_SESSION['pass'] = $userinfo['pass'];
-				
-			  header("Location: home.php?id=".$_SESSION['id']);
-
-        }else{
-          $connecterreur = "Mot de passe et / ou nom d'utilisateur incorrect.";
-        }
-
-      }else{
-      $connecterreur= "Tous les champs doivent Ãªtre complÃ©tÃ©s";
-
-      }
-
-
-    }
-
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="fr-FR">
 
 <head>
-   <title>formulaireauthentification?</title>
 
-  <!-- Custom fonts for this theme -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="keywords" content="">    
+
+  <title>gestionnaire de sctock</title>
+
+  <!-- Bootstrap core CSS -->
+  
+
+  <!-- Custom fonts for this template -->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-  <!-- Theme CSS -->
-  <link href="css/responsive.min.css" rel="stylesheet">
-  <link href="css/main.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+   <link href="csstyle.css" rel="stylesheet" type="text/css"/>
+   <link href="css/w3.css" rel="stylesheet" type="text/css"/>
 
-      
-
-
+   <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+   <link href="css/agency.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+  
+    
 </head>
 
 <body id="page-top">
-<header>
+ 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg bg-dark text-uppercase fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-secondary" id="mainNav">
+     <a href="index.php"><img class="w3-border-teal" src="img/logos/agriProofLogo.png" id="logo" title="logo"></a>
     <div class="container">
-		<a class="navbar-brand js-scroll-trigger" href="#page-top">StockApp</a>
-      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">StockApp</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
-      
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
-         
+        
           <li class="nav-item">
-            <a class="nav-link js-scroll- btn btn-info" href="register.php">register</a>
+            <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#">Vente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">Commande</a>
+          </li>
+          <!--<li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#team">équipe</a>
+          </li>-->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="login.php">Connexion</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="register.php">Incription</a>
           </li>
         </ul>
-    </div>
-    </div>
-  </nav>
-</header>
- 
-
-  <!-- Login Section -->
-<div id="login-form">
-  <section class="page-section py-5" id="ref">
-    <div class="container">
-      
-      <div class="row">
-        	            <img class="img-fluid" src="img/agriProofLogoR.png" alt="">
-
-		  	<div id="tcontainer">
-                
-                <?php if(isset($erreur)) echo '<span style="color:red;"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  '.$erreur.'</span>'; ?><?php if(isset($ok)) echo '<span style="color:yellow;"> '.$ok.'</span>'; ?> 
-            <br/><?php if(isset($ok2)) echo '<span style="color:#008c00;"> '.$ok2.'</span>'; ?><br /><?php if(isset($ok3)) echo '<span style="color:#008c00;"> '.$ok3.'</span>'; ?>  
-
-            <!-- zone de connexion -->
+          <div class="col-lg-12">
+        <div class="col-lg-6 buttons">
             
-            <form action="#login-form" method="POST" id="user-login" accept-charset="UTF-8">
-                <input type='hidden' name='submitted' id='submitted' value='1'/>
-                <h1>Identification</h1>
-                
-                <input type="text" placeholder="Entrer le nom d'utilisateur" name="pseudo" required>
-
-                <input type="password" placeholder="Entrer le mot de passe" name="pass" required>
-			     <font color="red" size="+1" face="Bradley Hand ITC"><strong>
-                	<?php
-                		if(isset($connecterreur)){
-                    	
-                        echo $connecterreur;
-                				}
-                	?>
-                     </strong></font>
-                
-                <input type="submit" id='submit' value='ENTRER' name="entrer">
-                
-                <strong><a href="register.php"><font color="#993333" size="+2" face="Bradley Hand ITC">S'inscrire</font></a></strong>
-                <div align="center">
-                    <a href="rest-pwd.php"><font size="+1" face="Bradley Hand ITC"><strong>Mots de pass oublie? </strong></font></a>
-                </div>
-                
-                	
-            </form>
-       
-         </div>
-      <!-- /.row -->
-
-		</div></div>
-  </section>
-
- 
-</div>
-  
-
-   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-4">
-            <span class="copyright">Copyright &copy;</span>gh <span class="tm-current-year">2020</span>
+            
         </div>
-        <div class="col-md-4">
-          <ul class="list-inline social-buttons">
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <ul class="list-inline quicklinks">
-            <li class="list-inline-item">
-              <a href="#">Privacy Policy</a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#">Terms of Use</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      </div>s
     </div>
-  </footer>
-	<!--Footer-->
 
+        </div>
+  </nav>
 
-
-  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-  <!--<div class="scroll-to-top d-lg-none position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
-      <i class="fa fa-chevron-up"></i>
-    </a>
-  </div>-->
-	
-
- 
+  
   
 
+    
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        
 
   <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-   <script src="gulpfile.js"></script>
 
-
-  <!-- Contact Form JavaScript -->
-  <script src="js/Validation.js"></script>
+  <!-- Contact form JavaScript -->
+  <script src="js/jqBootstrapValidation.js"></script>
   <script src="js/contact_me.js"></script>
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-
   <!-- Custom scripts for this template -->
-  <script src="js/responsive.min.js"></script>
-		
+  <script src="js/agency.min.js"></script>
+    <!-- custom javascript -->
+<script src="js/script.js" type="text/javascript"></script>
+   <!-- jQuery -->
+  <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
 
- 
+   <!-- Bootstrap files-->
+  <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    
+    
+    
+ <style>
+    
+      /*
+    innner barner*/
+    
+    
+    .inner_banner {
+    background: url(../img/cover-agirmarket.jpg);
+    background-repeat:no-repeat;
+    background-attachment: fixed; background-position: center; width: 100%!important; max-width: 100%; margin: 10px 0
+    background-position: center;
+    background-image: url(../img/cover-agirmarket.jpg);
+      -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    -ms-background-size: cover;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+.banner:after, .inner_banner:after {
+    background-color: transparent;
+    content: "";
+    left: 0;
+    opacity: 0.45;
+    top: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+    
+    /*!innner barner*/
+  
+}
 
+@media (max-width: 414px)
+.agileinfo-inner h2 {
+    padding: 38vw 0 5vw;
+}
+
+@media (max-width: 667px)
+.agileinfo-inner h2 {
+    padding: 25vw 0 5vw;
+    font-size: 2em;
+}
+@media (max-width: 800px)
+.agileinfo-inner h2 {
+    padding: 20vw 0 5vw;
+}
+@media (max-width: 1024px)
+.agileinfo-inner h2 {
+    padding: 16vw 0 5vw;
+    font-size: 2.5em;
+}
+@media (max-width: 1280px)
+.agileinfo-inner h2 {
+    padding: 13vw 0 5vw;
+}
+.agileinfo-inner h2 {
+    font-size: 3em;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 10vw 0 5vw;
+}
+
+    
+</style>
 </body>
 
 </html>

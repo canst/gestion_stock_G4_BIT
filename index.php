@@ -105,74 +105,7 @@
     
     
     
- <style>
-    
-      /*
-    innner barner*/
-    
-    
-    .inner_banner {
-    background: url(../img/cover-agirmarket.jpg);
-    background-repeat:no-repeat;
-    background-attachment: fixed; background-position: center; width: 100%!important; max-width: 100%; margin: 10px 0
-    background-position: center;
-    background-image: url(../img/cover-agirmarket.jpg);
-      -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    -ms-background-size: cover;
-    background-size: cover;
-    position: relative;
-    z-index: 1;
-}
-.banner:after, .inner_banner:after {
-    background-color: transparent;
-    content: "";
-    left: 0;
-    opacity: 0.45;
-    top: 0;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-}
-    
-    /*!innner barner*/
-  
-}
-
-@media (max-width: 414px)
-.agileinfo-inner h2 {
-    padding: 38vw 0 5vw;
-}
-
-@media (max-width: 667px)
-.agileinfo-inner h2 {
-    padding: 25vw 0 5vw;
-    font-size: 2em;
-}
-@media (max-width: 800px)
-.agileinfo-inner h2 {
-    padding: 20vw 0 5vw;
-}
-@media (max-width: 1024px)
-.agileinfo-inner h2 {
-    padding: 16vw 0 5vw;
-    font-size: 2.5em;
-}
-@media (max-width: 1280px)
-.agileinfo-inner h2 {
-    padding: 13vw 0 5vw;
-}
-.agileinfo-inner h2 {
-    font-size: 3em;
-    font-weight: 700;
-    text-transform: capitalize;
-    padding: 10vw 0 5vw;
-}
-
-    
-</style>
+ 
 </body>
 
 </html>

@@ -1,0 +1,152 @@
+USERS
+// acteur : proprietaire
+/*creation dun nouvel utilisateur*/
+INSERT INTO USERS (NAME, FIRSTNAME, Cnib, GENDER, Username, Password, Contacts, Type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+/*affichage des differents utilisateurs*/
+SELECT * FROM USERS GROUP BY TYPE
+/*supprimer un utilisateur*/
+DELETE FROM USERS WHERE Id_user = ? LIMIT 1
+/*modifier un utilisateur*/
+UPDATE USERS SET NAME = ?, FIRSTNAME = ?, Cnib = ?, GENDER = ?, Username = ?, Password = ?, Contacts = ?, Type = ? WHERE Id_user = ?
+
+PASSER COMMANDE
+// acteur : proprietaire + superviseur
+/*le statut de la commande aura trois valeurs possibles: en cours, annulee,validee*/
+/*effectuer commande*/
+INSERT INTO SUPPLY (ID_USER, ID_SUPPLIER, ID_SUPPLY, TYPE, FORMAT, PRODUCT_NAME, QUANTITY, STATUS, DATE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
+/*annuler commande*/
+UPDATE SUPPLY SET STATUS = ?
+/*afficher toutes les SUPPLY*/
+SELECT * FROM SUPPLY
+/*afficher toutes les SUPPLY en cours | annullee | validee */
+SELECT * FROM SUPPLY WHERE STATUS = ? 
+/*afficher toutes les SUPPLY en fonction de lutilisateur*/
+SELECT * FROM SUPPLY WHERE ID_USER = ? GROUP BY STATUS
+/*afficher toutes les SUPPLY a une date donnee*/
+SELECT * FROM SUPPLY WHERE DATE = ? GROUP BY STATUS
+/*afficher toutes les SUPPLY inferieur ou egale a une date donnee*/
+SELECT * FROM SUPPLY WHERE DATE <= ? GROUP BY STATUS
+/*afficher toutes les SUPPLY superieur ou egale a une date donnee*/
+SELECT * FROM SUPPLY WHERE DATE >= ? GROUP BY STATUS
+/*afficher toutes les SUPPLY passee entre 2 dates donnees*/
+SELECT * FROM SUPPLY WHERE DATE <= ? AND DATE >= ? GROUP BY STATUS
+/*afficher les SUPPLY validees*/
+SELECT * FROM SUPPLY WHERE STATUS = 'validee'
+/*afficher les SUPPLY en cours*/
+SELECT * FROM SUPPLY WHERE STATUS = 'en cours'
+/*afficher les SUPPLY annulee*/
+SELECT * FROM SUPPLY WHERE STATUS = 'annulee'
+/*annuler une commande*/
+UPDATE SUPPLY SET STATUS= annulee WHERE NUM_SUPPLY = ?
+/*valider une commande*/
+UPDATE SUPPLY SET STATUS= 'validee'WHERE NUM_SUPPLY = ?
+
+SUPPLIER
+// acteur : proprietaire + superviseur
+/*le type de fournisseur definit un fournisseur interne ou externe */
+/*creer un fournisseur*/
+INSERT INTO SUPPLIER (NAME, FIRSTNAME, REFERENCE, CONTACTS, EMAIL, TYPE) VALUES (?, ?, ?, ?, ?, ?)
+/*supprimer un fournisseur*/
+DELETE FORM SUPPLIER WHERE ID_SUPPLIER = ? LIMIT 1
+/*modifier un fournisseur*/
+UPDATE SUPPLIER SET NAME = ?, FIRSTNAME = ?, REFERENCE = ?, CONTACTS = ?, EMAIL = ?, TYPE = ? WHERE ID_SUPPLIER = ?
+/*afficher les supplier*/
+SELECT * FROM SUPPLIER GROUP BY TYPE
+
+WITHDRAWALS
+// acteur : proprietaire
+/*le retrait ne peut seffectuer que par le propietaire de la boutique*/
+/*faire un retrait*/
+INSERT INTO WITHDRAWALS(ID_USER, ID_CASHBOX, DATE, AMOUNT) VALUES(?, ?, ?, ?)
+/*afficher les WITHDRAWALS*/
+SELECT * FROM WITHDRAWALS
+/*afficher les WITHDRAWALS groupe par cashbox*/
+SELECT * FROM WITHDRAWALS GROUP BY ID_CASHBOX
+/*afficher les WITHDRAWALS en fonction dune date groupe par cashbox*/
+SELECT * FROM WITHDRAWALS WHERE DATE = ? GROUP BY ID_CASHBOX
+/*afficher les WITHDRAWALS effectuees inferieur a une date groupe par cashbox*/
+SELECT * FROM WITHDRAWALS WHERE DATE <= ? GROUP BY ID_CASHBOX
+/*afficher les WITHDRAWALS effectuees superieur a une date groupe par cashbox*/
+SELECT * FROM WITHDRAWALS WHERE DATE >= ? GROUP BY ID_CASHBOX
+/*afficher les WITHDRAWALS en fonction deux dates groupe par cashbox*/
+SELECT * FROM WITHDRAWALS WHERE DATE <= ? AND DATE >= ? GROUP BY ID_CASHBOX
+
+DELIVERIES
+// acteur : proprietaire + superviseur
+/*enregistrer un approvisionnement*/
+INSERT INTO DELIVERIES (ID_SUPPLIER, ID_PRODUCTS, TYPE, PRODUCT_NAME, FORMAT, QUANTITY, PRICE_UNITAIRE, DATE) VALUES(?, ?, ?, ?, ?, ?, ?,NOW())
+/*afficher les approvisionnements*/
+SELECT * FROM DELIVERIES ORDER BY DATE
+/*afficher les approvisionnement a une date donnee*/
+SELECT * FROM DELIVERIES WHERE DATE = ? GROUP BY ID_SUPPLIER
+/*afficher les approvisionnement avant une date donnee*/
+SELECT * FROM DELIVERIES WHERE DATE <= ? GROUP BY ID_SUPPLIER
+/*afficher les approvisionnement apres une date donnee*/
+SELECT * FROM DELIVERIES WHERE DATE >= ? GROUP BY ID_SUPPLIER
+/*afficher les approvisionnement entre 2 dates donnees*/
+SELECT * FROM DELIVERIES WHERE DATE <= ? AND DATE >= ? GROUP BY ID_SUPPLIER
+
+ORDERS
+/*ORDERS un PRODUCTS*/
+// acteur : caissier
+INSERT INTO ORDERS (ID_CASHBOX, ID_PRODUCTS, ID_CLIENTS, DATE, PAYMENT_TYPE, QUANTITY, PRICE_PAYE) VALUES (?, ?, ?, NOW(), ?, ?, ?)
+/*tableau qui se chargera de faire une boucle en fonction du nombre de produits vendus*/
+// acteur : proprietaire + caissier
+/*afficher toutes les ventes*/
+SELECT * FROM ORDERS ORDER BY ID_COMMAND
+/*afficher les PRODUCTSS vendus a une date donnee*/
+SELECT * FROM ORDERS WHERE DATE = ? GROUP BY ID_CASHBOX
+/*afficher les PRODUCTSS apres une date donnee*/
+SELECT * FROM ORDERS WHERE DATE <= ? GROUP BY ID_CASHBOX
+/*afficher les PRODUCTSS apres une date donnee*/
+SELECT * FROM ORDERS WHERE DATE >= ? GROUP BY ID_CASHBOX
+
+//
+/*afficher les PRODUCTSS vendus a une date donnee a un CLIENTS specifique*/
+SELECT * FROM ORDERS WHERE DATE = ? AND NAME LIKE %?% GROUP BY ID_CASHBOX
+/*afficher les PRODUCTSS apres une date donnee*/
+SELECT * FROM ORDERS WHERE DATE <= ? AND NAME LIKE %?% GROUP BY ID_CASHBOX
+/*afficher les PRODUCTSS apres une date donnee*/
+SELECT * FROM ORDERS WHERE DATE >= ? AND NAME LIKE %?% GROUP BY ID_CASHBOX
+//
+
+/*afficher les ventes avec les dettes*/
+SELECT * FROM ORDERS WHERE PRICE_PAYE < ( SELECT (SUM(PRICE)) FROM PRODUCTS )
+/*afficher les ventes avec les dettes dun client donne*/
+SELECT * FROM ORDERS WHERE PRICE_PAYE < ( SELECT (SUM(PRICE)) FROM PRODUCTS ) AND  WHERE NAME = ?
+/*mettre a jour les dettes dun client*/
+// acteur : caissier
+UPDATE ORDERS SET PRICE_PAYE = ? WHERE NAME = ? AND DATE = ?
+
+PL/SQL
+1. IL FAUDRAIT AUTOMATIQUEMENT A JOUR LA TABLE DES PRODUCTSS(QUANTITY SURTOUT) A CHAQUE ENREGISTREMENT DE LIVRAISON, LIVRAISON EXTERNE, VENTE D'UN PRODUCTS ...
+2. CHAQUE PRODUCTS EST ASSIGNE A UN TYPE. SI LE PRODUCTS EST NOUVEAU OU D'UN NOUVEAU FORMAT, LE TYPE DOIT ETRE MIS A JOUR AUTOMATIQUEMENT DANS LA TABLE TYPE
+3. METTRE A JOUR AUTOMATIQUEMENT LE MONTANT TOTAL DUNE CASISSE LORS DUN RETRAIT SUR CELLE-CI
+
+PRODUITS
+// acteur : proprietaire + superviseur
+/*modifications de la table lors de l'achat de produits*/
+UPDATE PRODUCTS SET QUANTITY = QUANTITY - ? WHERE PRODUCT_NAME = ? AND FORMAT = ?
+/*modifications de la table lors de lapprovisionnement*/
+UPDATE PRODUCTS SET QUANTITY = QUANTITY + ? WHERE PRODUCT_NAME = ? AND FORMAT = ?
+
+
+CAISSE
+/*voir le montant dune caisse*/
+// acteur : caissier + proprietaire
+SELECT AMOUNT FROM CASHBOX WHERE ID_CASHBOX = ?
+/*voir le manque a gagner dune caisse*/
+
+// acteur : auto
+/*mise a jour du montant lors dune vente*/
+UPDATE CASHBOX SET AMOUNT = AMOUNT + ? WHERE ID_CASHBOX = ?
+/*mise a jour du montant lors dun retrait dans la caisse*/
+UPDATE CASHBOX SET AMOUNT = AMOUNT + ? WHERE ID_CASHBOX = ?
+
+
+
+
+
+
+
+

@@ -23,12 +23,9 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-   <link href="csstyle.css" rel="stylesheet" type="text/css"/>
-   <link href="css/w3.css" rel="stylesheet" type="text/css"/>
+     <link href="css/w3.css" rel="stylesheet" type="text/css"/>
 
-   <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-   <link href="css/agency.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+      <link href="css/main.css" rel="stylesheet">
   
     
 </head>
@@ -81,28 +78,10 @@
   
 
     
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
 
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Contact form JavaScript -->
-  <script src="js/jqBootstrapValidation.js"></script>
-  <script src="js/contact_me.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/agency.min.js"></script>
-    <!-- custom javascript -->
-<script src="js/script.js" type="text/javascript"></script>
-   <!-- jQuery -->
-  <script src="js/jquery-2.0.0.min.js" type="text/javascript"></script>
-
-   <!-- Bootstrap files-->
-  <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-  <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
-    
+ 
+  
     
     
  

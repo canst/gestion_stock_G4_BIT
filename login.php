@@ -24,23 +24,37 @@
 <body id="page-top">
 <header>
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg bg-dark text-uppercase fixed-top" id="mainNav">
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-secondary" id="mainNav">
+     <a href="index.php"><img class="w3-border-teal" src="img/logos/agriProofLogo.png" id="logo" title="logo"></a>
     <div class="container">
-		<a class="navbar-brand js-scroll-trigger" href="#page-top">StockApp</a>
-      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">StockApp</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
-      
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+      <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav text-uppercase ml-auto">
-         
+        
           <li class="nav-item">
-            <a class="nav-link js-scroll- btn btn-info" href="index.php">acceuil</a>
+            <a class="nav-link js-scroll-trigger" href="index.php">acceuil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#">Vente</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">Commande</a>
+          </li>
+          <!--<li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#team">équipe</a>
+          </li>-->
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="register.php">Incription</a>
           </li>
         </ul>
+         
     </div>
-    </div>
+
+        </div>
   </nav>
 </header>
  

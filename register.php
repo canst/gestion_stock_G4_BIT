@@ -37,15 +37,7 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="index.php">acceuil</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#">Vente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">Commande</a>
-          </li>
-          <!--<li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">équipe</a>
-          </li>-->
+        
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="login.php">Connexion</a>
           </li>
@@ -68,15 +60,14 @@
         	   <img class="img-fluid" src="img/agriProofLogoR.png" alt="">
         
 		  	<div id="tcontainer">
-            <?php if(isset($erreur)) echo '<span style="color:red;"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  '.$erreur.'</span>'; ?><?php if(isset($ok)) echo '<span style="color:yellow;"> '.$ok.'</span>'; ?> 
-            <br/><?php if(isset($ok2)) echo '<span style="color:#008c00;"> '.$ok2.'</span>'; ?><br /><?php if(isset($ok3)) echo '<span style="color:#008c00;"> '.$ok3.'</span>'; ?>  
+             
 
             
                 <div align="center"><a href="#"><font size="+1" face="Bradley Hand ITC"><strong>formulaire d'enregistrements </strong></font></a></div>
             
             <form action="#registration" method="POST" id="user-login" accept-charset="UTF-8">
                 <input type='hidden' name='submitted' id='submitted' value='1'/>
-                <h1 align="center text-center">S'ENREGISTRER</h1>
+                <h1 align="center text-center" style="margin-left:10px;">S'ENREGISTRER</h1>
                 
                 <input type="text" placeholder="Nom et prenom(s)" name="name" id='name'  required>
                 
@@ -85,9 +76,12 @@
                 
                 <input type="email" placeholder="tonmail@gmail.com" id='mail' name="mail" required style="width:339px; height:50px; padding-top:5px;">
                 
-                <input type="text" placeholder="Nom d'utlisateur" id='pseudo' name="pseudo" required>
-                
-              <input type="password" placeholder="Entrer le mot de passe" id='pass'  name="pass" required>
+                <select style="width:339px; height:50px;">
+                    <optgroup>
+                        <option>Homme</option>
+                        <option>Femme</option>
+                    </optgroup>
+                </select>
                 
                 <input type="tel" placeholder="Numero de phone" name="phone" id='phone' required style="width:339px; height:50px;">
                 
@@ -96,6 +90,7 @@
                 <input type="text" placeholder="Entrer la ville" id='city' name="city" required>
                 	
                 <input type="submit" id='submit' value="s'enregistrer" name="valider" >
+                <input type="reset" id="submit" value="effacer" style="width:339px; height:50px;">
                 
                 <div align="center"><a href="login.php"  style="color:yellow;"><font size="+1" face="Bradley Hand ITC"><strong>cliquez ici pour vous connecter </strong></font></a></div>
                 	
@@ -153,37 +148,9 @@
 
 
 
-  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-  <!--<div class="scroll-to-top d-lg-none position-fixed ">
-    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
-      <i class="fa fa-chevron-up"></i>
-    </a>
-  </div>-->
-	
-
  
   
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        
-
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-	<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
-   <script src="gulpfile.js"></script>
-
-
-  <!-- Contact Form JavaScript -->
-  <script src="js/Validation.js"></script>
-  <script src="js/contact_me.js"></script>
-
-<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="js/responsive.min.js"></script>
-		
 
  
 

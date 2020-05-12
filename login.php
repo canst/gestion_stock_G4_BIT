@@ -39,15 +39,6 @@
             <a class="nav-link js-scroll-trigger" href="index.php">acceuil</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#">Vente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#about">Commande</a>
-          </li>
-          <!--<li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#team">équipe</a>
-          </li>-->
-          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="register.php">Incription</a>
           </li>
         </ul>

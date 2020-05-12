@@ -63,12 +63,7 @@
             <a class="nav-link js-scroll-trigger" href="register.php">Incription</a>
           </li>
         </ul>
-          <div class="col-lg-12">
-        <div class="col-lg-6 buttons">
-            
-            
-        </div>
-      </div>s
+         
     </div>
 
         </div>

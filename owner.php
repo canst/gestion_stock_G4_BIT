@@ -22,9 +22,9 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
   <!-- Custom styles for this template -->
-     <link href="css/w3.css" rel="stylesheet" type="text/css"/>
+     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 
-      <link href="css/main.css" rel="stylesheet">
+      <link href="css/.css" rel="stylesheet">
   
     
 </head>

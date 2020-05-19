@@ -1,0 +1,15 @@
+section#section1{
+    display: flex;
+}
+
+#allblock{
+    padding-left: -5%;
+}
+
+#overfl{
+    
+    width: 20%;
+    height: 10%;
+    position: relative;
+    float: left;
+}

@@ -1,42 +1,25 @@
 <?php 
-
 require ('../../config/fonctions.php');
-
-if(!empty($_POST))
+global $dette;
+global $id;
+if (isset($_GET['ID']))
 {
-	$messages = array();
-	extract($_POST);
-	$nom = strip_tags($nom);
-	$prenom = strip_tags($prenom);
-	$email = strip_tags($email);
-	$contact = strip_tags($contact);
-	$type = strip_tags($type);
-
-	if(empty($nom))
-	{
-		array_push($messages, "Entrez un nom");
-	}
-	if(empty($prenom))
-	{
-		array_push($messages, "Entrez un prenom");
-	}
-	if(empty($email))
-	{
-		array_push($messages, "Entrez une adresse mail");
-	}
-	if(empty($contact))
-	{
-		array_push($messages, "Entrez un contact");
-	}
-	if(count($messages)==0)
-	{
-		$client = addClient($nom, $prenom, $email, $contact, $type);
-		$success = "Client enregistre";
-	}
+	$dette = lookUnpaid($_GET['ID']);
+  $id = $_GET['ID'];
 }
+if (isset($_POST['save'])) 
+{
+	extract($_POST);
+	$id = strip_tags($id);
+	$sold = strip_tags($sold);
+	$solderDette = eraseDoubt($id, $sold);
+  //$dette = lookUnpaid($id);
+}
+
+
  ?>
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>
@@ -50,7 +33,7 @@ if(!empty($_POST))
       <nav class="navbar navbar-expand-md bg-dark fixe-top" id="mainNav">
      <a href="login.php"><img class="w3-border-teal w-25 w-25" src="img/GS.png" id="logo" title="logo"></a>
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger text-white" href="#">Golden Store</a>
+      <a class="navbar-brand js-scroll-trigger text-white" href="#">APPStock</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -61,13 +44,14 @@ if(!empty($_POST))
         <br>
     </header>
 
-<body>
+
 <div class="container col" id="allblock">
     <div class="row">
         <section id="section1" class="col-md-3">
             <div class="container">
                 <div class="card border-success  text-uppercase" style="max-width: 18rem;">
                    <div class="card-header bg-danger border-success text-center">client</div>
+                      <div class="card-header bg-danger border-success text-center">client</div>
                       <div class="card-body text-success">
                         <a class="nav-link active btn btn-info" target="_self" href="caisse.php">Caisse</a>
                       </div>
@@ -88,46 +72,48 @@ if(!empty($_POST))
                    <div class="card-header bg-danger border-success text-center">Client</div>
                 </div>
             </div>
+
         </section>
     
-        <section id="section2" class="col-md-8 align-self-md-start">              
+        <section id="section2" class="col-offset-sm-3 col-md-9" >              
             <div class="container" id="creer">
- <?php 
+          <table>
+            <tr>
+              <th>No. COMMANDE</th>
+              <th>No. CAISSE</th>
+              <th>CLIENT</th>
+              <th>DATE</th>
+              <th></th>
+              <th>PAIEMENT</th>
+              <th>MONTANT PAYE</th>
+              <th>DEPENSE TOTALLE</th>
+              <th>RESTE A PAYER</th>
+              <th>CONTACT CLIENT</th>
+              <th>SOLDER</th>
+            </tr>
+            
+              <form action="#" method="post">
+            <tr>
+            <td><input type="text" readonly name="id" value="<?= $dette->ID_COMMANDE?>"></td>
+            <td><input type="text" readonly value="<?= $dette->ID_CASHBOX?>"></td>
+            <td><input type="text" readonly value="<?= $dette->NAME?>"></td>
+            <td><input type="text" readonly value="<?= $dette->DATE?>"><td>
+            <td><input type="text" readonly value="<?= $dette->PAYMENT_TYPE?>"></td>
+            <td><input type="text" readonly value="<?= $dette->PAID?>"></td>
+            <td><input type="text" readonly value="<?= $dette->TOTAL?>"></td>
+            <td><input type="text" readonly value="<?= $dette->TOTAL - $dette->PAID?>"></td>
+            <td><input type="text" readonly value="<?= $dette->CONTACTS?>"></td>
+            <td><input type="number" name="sold" max="<?= $dette->TOTAL - $dette->PAID?>" required></td>
+            </tr>
+            
+            <button name="save">Enregistrer</button>
+          </form>
+          </table>
 
-	if(isset($success))
-	{
-		echo $success;
-		//on pourra utiliser une style de succes ici
-	}
-	if(!empty($messages))
-	{
-		foreach ($messages as $message) 
-		{
-			echo $message;
-			//on pourra utiliser une style de warning ici
-		}
-	}
-
-  ?>
-
- <form action="#" method="post">
- 	<label>Nom</label><br>
- 	<input type="text" name="nom" required><br>
- 	<label>Prenom</label><br>
- 	<input type="text" name="prenom" required><br>
- 	<label>Email</label><br>
- 	<input type="mail" name="email" required><br>
- 	<label>Contact</label><br>
- 	<input type="text" name="contact" required><br>
- 	<label>Choisir le type du client</label><br>
- 	<select required name = "type">
- 		<option value = "grossiste">Grossiste</option>
- 		<option value = "complementaire">Complementaire</option>
- 		<option value = "Autre">Autre</option>
- 	</select><br>
- 	<button>Enregistrer</button>
- </form>
- </section>
+          <a href="dette.php">Retour</a>
+        </section>
+    
+     </section>
    
     </div>
 </div>

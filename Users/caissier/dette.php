@@ -1,42 +1,13 @@
 <?php 
-
 require ('../../config/fonctions.php');
+$dettes = lookUnpaids();
 
-if(!empty($_POST))
-{
-	$messages = array();
-	extract($_POST);
-	$nom = strip_tags($nom);
-	$prenom = strip_tags($prenom);
-	$email = strip_tags($email);
-	$contact = strip_tags($contact);
-	$type = strip_tags($type);
 
-	if(empty($nom))
-	{
-		array_push($messages, "Entrez un nom");
-	}
-	if(empty($prenom))
-	{
-		array_push($messages, "Entrez un prenom");
-	}
-	if(empty($email))
-	{
-		array_push($messages, "Entrez une adresse mail");
-	}
-	if(empty($contact))
-	{
-		array_push($messages, "Entrez un contact");
-	}
-	if(count($messages)==0)
-	{
-		$client = addClient($nom, $prenom, $email, $contact, $type);
-		$success = "Client enregistre";
-	}
-}
+
  ?>
 
- <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
   <head>
     <title>
@@ -50,7 +21,7 @@ if(!empty($_POST))
       <nav class="navbar navbar-expand-md bg-dark fixe-top" id="mainNav">
      <a href="login.php"><img class="w3-border-teal w-25 w-25" src="img/GS.png" id="logo" title="logo"></a>
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger text-white" href="#">Golden Store</a>
+      <a class="navbar-brand js-scroll-trigger text-white" href="#">APPStock</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
@@ -61,7 +32,7 @@ if(!empty($_POST))
         <br>
     </header>
 
-<body>
+
 <div class="container col" id="allblock">
     <div class="row">
         <section id="section1" class="col-md-3">
@@ -88,46 +59,46 @@ if(!empty($_POST))
                    <div class="card-header bg-danger border-success text-center">Client</div>
                 </div>
             </div>
+
         </section>
     
-        <section id="section2" class="col-md-8 align-self-md-start">              
+        <section id="section2" class="col-offset-sm-3 col-md-9">              
             <div class="container" id="creer">
- <?php 
+          <table>
+            <tr>
+              <th>NO.COMMANDE</th>
+              <th>No. CAISSE</th>
+              <th>CLIENT</th>
+              <th>DATE</th>
+              <th></th>
+              <th>TYPE DE PAIEMENT</th>
+              <th>MONTANT PAYE</th>
+              <th>DEPENSE TOTALLE</th>
+              <th>RESTE A PAYER</th>
+              <th>CONTACT CLIENT</th>
+              <th>SOLDER</th>
+            </tr>
 
-	if(isset($success))
-	{
-		echo $success;
-		//on pourra utiliser une style de succes ici
-	}
-	if(!empty($messages))
-	{
-		foreach ($messages as $message) 
-		{
-			echo $message;
-			//on pourra utiliser une style de warning ici
-		}
-	}
+            
+            <?php foreach ($dettes as $dette):?>
+              <tr>
+            <td><?= $dette->ID_COMMANDE?></td>
+            <td><?= $dette->ID_CASHBOX?></td>
+            <td><?= $dette->NAME?></td>
+            <td><?= $dette->DATE?><td>
+            <td><?= $dette->PAYMENT_TYPE?></td>
+            <td><?= $dette->PAID?>
+            <td><?= $dette->TOTAL?></td>
+            <td><?= $dette->TOTAL - $dette->PAID?></td>
+            <td><?= $dette->CONTACTS?></td>
+            <td><a href="gerer_dette.php?ID=<?= $dette->ID_COMMANDE?>">Solder</a></td>
+          </tr>
+          <?php endforeach ?>  
+            
+          </table>
 
-  ?>
 
- <form action="#" method="post">
- 	<label>Nom</label><br>
- 	<input type="text" name="nom" required><br>
- 	<label>Prenom</label><br>
- 	<input type="text" name="prenom" required><br>
- 	<label>Email</label><br>
- 	<input type="mail" name="email" required><br>
- 	<label>Contact</label><br>
- 	<input type="text" name="contact" required><br>
- 	<label>Choisir le type du client</label><br>
- 	<select required name = "type">
- 		<option value = "grossiste">Grossiste</option>
- 		<option value = "complementaire">Complementaire</option>
- 		<option value = "Autre">Autre</option>
- 	</select><br>
- 	<button>Enregistrer</button>
- </form>
- </section>
+         </section>
    
     </div>
 </div>

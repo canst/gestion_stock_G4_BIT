@@ -1,10 +1,11 @@
-section#section1{
-    display: flex;
+section#section2{
+    width:auto;
+   height:700px;
+overflow:scroll;
+margin-left:-15px;
 }
 
-#allblock{
-    padding-left: -5%;
-}
+
 
 #overfl{
     

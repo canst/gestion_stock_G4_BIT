@@ -6,8 +6,8 @@
       stockApp
     </title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-      <link href="/css/owner.css" rel="stylesheet" type="text/css">
+     <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+      <link href="../../css/styles.css" rel="stylesheet" type="text/css">
     </head> 
   <body id="page-top" >
       <nav class="navbar navbar-expand-lg bg-dark fixe-top" id="mainNav">
@@ -37,31 +37,34 @@
         <br>
     </header>
 
-<div class="container" id="allblock">
+<div class="">
     <div class="row">
-        <section id="section1" class="col-md-3">
+        <section id="section1" class="col-md-3 page-link">
             <div class="container">
                 <div class="card border-success mb-3 text-uppercase" style="max-width: 18rem;">
                   <div class="card-header text-danger bg-success border-success text-center">Dashboard</div>
+                    <div class="card-body text-success">
+                         <a class="nav-link active btn btn-info" target="_self" href="../../register.php">Creer Utilisateur</a>
+                      </div>
                       <div class="card-body text-success">
                           <!--<input type="button" value="Clients" name=""onclick="show()" class="btn btn-info">-->
-                        <a class="nav-link active btn btn-warning" target="_self" href="caisse.php">Caisse</a>
+                        <a class="nav-link active btn btn-info" target="_self" href="caisse.php">Caisse</a>
                       </div>
                      <div class="card-body text-success">
-                         <a class="nav-link active btn btn-secondary" target="_self" href="produits.php">Produits</a>
+                         <a class="nav-link active btn btn-info" target="_self" href="produits.php">Produits</a>
 
                       </div>
                      <div class="card-body text-success">
-                         <a class="nav-link active btn btn-light" target="_self" href="livraison.php">Livraisons</a>
+                         <a class="nav-link active btn btn-info" target="_self" href="livraison.php">Livraisons</a>
                       </div>
                     <div class="card-body text-success">
-                         <a class="nav-link active btn btn-dark" target="_self" href="ventes.php">Ventes</a>
+                         <a class="nav-link active btn btn-info" target="_self" href="ventes.php">Ventes</a>
                       </div>
                     <div class="card-body text-success">
-                         <a class="nav-link active btn btn-success" target="_self" href="client.php">Clients</a>
+                         <a class="nav-link active btn btn-info" target="_self" href="client.php">Clients</a>
                       </div>
                     <div class="card-body text-success">
-                         <a class="nav-link active btn btn-danger" target="_self" href="dettes.php">Dettes</a>
+                         <a class="nav-link active btn btn-info" target="_self" href="dettes.php">Dettes</a>
                       </div>
                     <div class="card-body text-success">
                          <a class="nav-link active btn btn-info" target="_self" href="retrait.php">Retrait</a>
@@ -88,7 +91,6 @@
               <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Sint sit mollit irure quis est nostrud cillum consequat Lorem esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in labore cillum elit enim. Consequat aliquip incididunt ipsum et minim laborum laborum laborum et cillum labore. Deserunt adipisicing cillum id nulla minim nostrud labore eiusmod et amet. Laboris consequat consequat commodo non ut non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem aute nostrud magna.</div>
             </div>
         </div>-->
-            <section class="py-5 bg-yellow">
       <div class="container">
           <div class=" text-center">
               <h2 class="section-heading text-uppercase"><font size="+3" face="Comic Sans MS">Les Stocks</font></h2>
@@ -102,7 +104,7 @@
                   </ol>
             <div class="carousel-inner">
             <div class="carousel-item active">
-              <img class="d-block w-100" src="/img/stockimg1.jpg" alt="First slide">
+              <img class="d-block w-100" src="../../img/stockimg1.jpg" alt="First slide">
                 </div>
                     <div class="carousel-item">
                     <img class="d-block w-100" src="/img/stockimg2.jpg" alt="Second slide">
@@ -112,14 +114,14 @@
                       </div>
                     </div>
                     <div class="carousel-item">
-                  <img class="d-block w-100" src="/img/stockimg3.jpg" alt="Third slide">
+                  <img class="d-block w-100" src="../../img/stockimg3.jpg" alt="Third slide">
                      <div class="carousel-caption d-none d-md-block">
                         <h5>Lorem Ipsom</h5>
                         <p>Lorem ipsum thsi y the reak tell meead gh  liisoios</p>
                       </div> 
                 </div>
                 <div class="carousel-item">
-                  <img class="d-block w-100" src="/img/stockimg1.jpg" alt="Third slide">
+                  <img class="d-block w-100" src="../../img/stockimg1.jpg" alt="Third slide">
                       <div class="carousel-caption d-none d-md-block">
                         <h5>Lorem Ipsom</h5>
                         <p>Lorem ipsum thsi y the reak tell meead gh  liisoios</p>
@@ -136,7 +138,7 @@
                 </a>
             </div>
     </div>
-</section>
+
     </section>
    
     </div>
